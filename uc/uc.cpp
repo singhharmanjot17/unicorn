@@ -379,9 +379,10 @@ public:
         }
     }
 
-    static void PrettyPrint(SyntaxNode *node, const string &indent = "")
+    static void PrettyPrint(SyntaxNode *node, const string &indent = "", bool isLast = true)
     {
-        cout << indent << SyntaxKindToString(node->GetKind());
+        string marker = isLast ? "└──" : "├──";
+        cout << indent << marker << SyntaxKindToString(node->GetKind());
 
         if (SyntaxToken *t = dynamic_cast<SyntaxToken *>(node))
         {
@@ -393,10 +394,12 @@ public:
 
         cout << endl;
 
-        string newIndent = indent + "  ";
-        for (SyntaxNode *child : node->GetChildren())
+        string newIndent = indent + (isLast ? "    " : "│     ");
+        auto children = node->GetChildren();
+        SyntaxNode *lastChild = children.empty() ? nullptr : children.back();
+        for (SyntaxNode *child : children)
         {
-            PrettyPrint(child, newIndent);
+            PrettyPrint(child, newIndent, child == lastChild);
         }
     }
 };
