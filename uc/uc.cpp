@@ -24,14 +24,14 @@ class SyntaxToken
 {
 public:
     SyntaxToken(SyntaxKind kind, int position, const string &text, int value)
-        : Kind(kind), Position(position), Text(text), value(value)
+        : Kind(kind), Position(position), Text(text), Value(value)
     {
     }
 
     SyntaxKind Kind;
     int Position;
     string Text;
-    int value;
+    int Value;
 };
 
 class Lexer
@@ -133,6 +133,35 @@ public:
     }
 };
 
+string TokenKindToString(SyntaxKind kind)
+{
+    switch (kind)
+    {
+    case SyntaxKind::NumberToken:
+        return "NumberToken";
+    case SyntaxKind::PlusToken:
+        return "PlusToken";
+    case SyntaxKind::MinusToken:
+        return "MinusToken";
+    case SyntaxKind::StarToken:
+        return "StarToken";
+    case SyntaxKind::SlashToken:
+        return "SlashToken";
+    case SyntaxKind::OpenParenthesisToken:
+        return "OpenParenthesisToken";
+    case SyntaxKind::CloseParenthesisToken:
+        return "CloseParenthesisToken";
+    case SyntaxKind::BadToken:
+        return "BadToken";
+    case SyntaxKind::WhitespaceToken:
+        return "WhitespaceToken";
+    case SyntaxKind::EndOfFileToken:
+        return "EndofFileToken";
+    default:
+        return "UnknownToken";
+    }
+}
+
 class Program
 {
 
@@ -157,10 +186,8 @@ public:
                 SyntaxToken token = lexer.NextToken();
                 if (token.Kind == SyntaxKind::EndOfFileToken)
                     break;
-                cout << static_cast<int>(token.Kind) << ": '" << token.Text << "'";
-                if (token.value != 0)
-                    cout << " value: " << token.value;
-                // cout << " (" + to_string((int)(token->kind)) + ")";
+                cout << TokenKindToString(token.Kind) << " : " << token.Text << "' " << token.Value;
+                cout << endl;
             }
         }
     }
