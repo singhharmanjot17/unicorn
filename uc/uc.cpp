@@ -214,7 +214,7 @@ public:
             string text = _text.substr(start, length);
             int value = stoi(text);
             Next();
-            cout << "Extracted token: " << text << endl; // Add this lin
+            cout << "Extracted Number token: " << text << endl; // Add this lin
             return SyntaxToken(SyntaxKind::NumberToken, start, text, value);
         }
 
@@ -227,6 +227,7 @@ public:
             }
             int length = _position - start;
             string text = _text.substr(start, length);
+            cout << "Extracted Space token: " << text << endl;
             return SyntaxToken(SyntaxKind::WhitespaceToken, start, text, 0);
         }
 
@@ -234,36 +235,42 @@ public:
         {
             int start = _position;
             Next();
+            cout << "Extracted plus token: " << endl;
             return SyntaxToken(SyntaxKind::PlusToken, start, "+", 0);
         }
         else if (Current() == '-')
         {
             int start = _position;
             Next();
+            cout << "Extracted minus token: " << endl;
             return SyntaxToken(SyntaxKind::MinusToken, start, "-", 0);
         }
         else if (Current() == '*')
         {
             int start = _position;
             Next();
+            cout << "Extracted star token" << endl;
             return SyntaxToken(SyntaxKind::StarToken, start, "*", 0);
         }
         else if (Current() == '/')
         {
             int start = _position;
             Next();
+            cout << "Extracted slash token:" << endl;
             return SyntaxToken(SyntaxKind::SlashToken, start, "/", 0);
         }
         else if (Current() == '(')
         {
             int start = _position;
             Next();
+            cout << "Extracted open parenthesis token:" << endl;
             return SyntaxToken(SyntaxKind::OpenParenthesisToken, start, "(", 0);
         }
         else if (Current() == ')')
         {
             int start = _position;
             Next();
+            cout << "Extracted close parenthesis token:" << endl;
             return SyntaxToken(SyntaxKind::CloseParenthesisToken, start, ")", 0);
         }
 
