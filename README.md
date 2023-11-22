@@ -2,6 +2,7 @@
 
 ### Introduction
 
+- This is a university project for the 5th semester Compiler Design class for Manipal Institute Of technology , Bengaluru.
 - This is a (non fully featured) compiler written in C++ for ANSI C89/C90 to MIPS 1 (ABI Compliant)
 - It uses Flex for lexical analysis, and Bison (3.3.2) for parsing to an AST.
 - The target environment is Ubuntu 16, however a lot of the features may work on Unix based systems such as MacOS (exempt features are mentioned below).
